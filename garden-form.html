@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Yvonne Prototype</title>
+    <link rel = "stylesheet"
+       type = "text/css"
+       href = "garden.css">
+   </link>
+</head>
+
+<body>
+
+    <div id="react-holder">
+    </div>
+
+    <script type="text/babel">
+        // can be in separate script - for jsx type="text/babel"
+        const PageTitle = "Flower Profile";
+
+        const FormPage = () => (
+            <div>
+                <h2>{PageTitle}</h2>
+                <TextInput id="plant-name" name="plant-name" label="Name" className="text-input"/>
+                <TextInput id="plant-water" name="plant-water" label="Watering preference" className="text-input"/>
+                <Dropdown
+                    id="plant-sunlight"
+                    name="plant-sunlight"
+                    label="Sunlight preference"
+                    className="dropdown"
+                    options={[
+                        {key: "", value: "Please select..."},
+                        {key: "a", value: "Direct sunlight"},
+                        {key: "b", value: "Part sun/Part shade"},
+                        {key: "c", value: "Bright, indirect sunlight"},
+                        {key: "d", value: "Indirect/filtered light"},
+                        {key: "e", value: "Low light"},
+                        {key: "f", value: "Other"}
+                    ]}
+                    onChangeHandler={print}
+                />
+
+            </div>
+        );
+
+        const TextInput = ({ id, className, name, label }) => (
+            <div>
+                <label htmlFor={id}>
+                    {label}
+                </label>
+                <input
+                    type="text"
+                    name={name}
+                    id={id}
+                    className={className}
+                    onChange={e => print(e)}>
+                </input>
+            </div>
+        );
+
+        const Dropdown = ({ id, className, label, name, onChangeHandler, options }) => (
+            <div>
+                <label htmlFor={id}>
+                    {label}
+                </label>
+                <select id={id} name={name} onChange={onChangeHandler} className={className}>
+                    {
+                        options.map((item, index) => (
+                            <option key={index} value={item.key}> { item.value }</option>
+                        ))
+                    }
+                </select>
+            </div>
+        );
+
+        function print(val) { console.log(val.target.value) }
+
+        ReactDOM.render(
+            <FormPage />,
+            document.getElementById("react-holder")
+        );
+    </script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</body>
+</html>
