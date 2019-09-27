@@ -114,6 +114,7 @@ label {
     padding: 12px 32px 12px 32px;
     display: block;
     margin: 5% auto 5% auto;
+    border: none;
 }
 
 .action-btn:hover {
