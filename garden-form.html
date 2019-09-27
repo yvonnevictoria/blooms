@@ -1,91 +1,185 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>Yvonne Prototype</title>
-    <link rel = "stylesheet"
-       type = "text/css"
-       href = "garden.css">
-   </link>
-</head>
+    <head>
+        <title>Yvonne Prototype</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300,400&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="garden.css" />
+    </head>
 
-<body>
+    <body>
 
-    <div id="react-holder">
-    </div>
+        <div id="react-holder">
+        </div>
 
-    <script type="text/babel">
-        // can be in separate script - for jsx type="text/babel"
-        const PageTitle = "Flower Profile";
+        <script type="text/babel">
+            const PageTitle = "Blooms";
 
-        const FormPage = () => (
-            <div>
-                <h2>{PageTitle}</h2>
-                <TextInput id="plant-name" name="plant-name" label="Name" className="text-input"/>
-                <TextInput id="plant-water" name="plant-water" label="Watering preference" className="text-input"/>
-                <Dropdown
-                    id="plant-sunlight"
-                    name="plant-sunlight"
-                    label="Sunlight preference"
-                    className="dropdown"
-                    options={[
-                        {key: "", value: "Please select..."},
-                        {key: "a", value: "Direct sunlight"},
-                        {key: "b", value: "Part sun/Part shade"},
-                        {key: "c", value: "Bright, indirect sunlight"},
-                        {key: "d", value: "Indirect/filtered light"},
-                        {key: "e", value: "Low light"},
-                        {key: "f", value: "Other"}
-                    ]}
-                    onChangeHandler={print}
-                />
+            const FormPage = () => (
+                <div className="form-wrapper">
+                    <HeadingEdit placeholder="Name of flower" />
+                    <label>Watering frequency</label>
+                    <div className="form-element radio-chip-group">
+                        <RadioChip
+                            id="plant-wf-daily"
+                            name="plant-watering-frequency"
+                            className="radio-chip"
+                            label="Every day"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant-wf-2days"
+                            name="plant-watering-frequency"
+                            className="radio-chip"
+                            label="Every 2-3 days"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant-wf-weekly"
+                            name="plant-watering-frequency"
+                            className="radio-chip"
+                            label="Weekly"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant-wf-fortnightly"
+                            name="plant-watering-frequency"
+                            className="radio-chip"
+                            label="Fortnightly"
+                            onChangeHandler={print}
+                        />
+                    </div>
 
-            </div>
-        );
+                    <label>Watering level</label>
+                    <div className="form-element radio-chip-group">
+                        <RadioChip
+                            id="plant-wl-wet"
+                            name="plant-watering-level"
+                            className="radio-chip"
+                            label="Wet soil"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant-wl-moist"
+                            name="plant-watering-level"
+                            className="radio-chip"
+                            label="Moist soil"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant--wl-light"
+                            name="plant-watering-level"
+                            className="radio-chip"
+                            label="Lightly wet soil"
+                            onChangeHandler={print}
+                        />
+                    </div>
 
-        const TextInput = ({ id, className, name, label }) => (
-            <div>
-                <label htmlFor={id}>
-                    {label}
-                </label>
-                <input
-                    type="text"
-                    name={name}
-                    id={id}
-                    className={className}
-                    onChange={e => print(e)}>
-                </input>
-            </div>
-        );
+                    <label>Likes humidity?</label>
+                    <div className="form-element radio-chip-group">
+                        <RadioChip
+                            id="plant-humidity-yes"
+                            name="plant-humidity"
+                            className="radio-chip"
+                            label="Yes, lots of moisture"
+                            onChangeHandler={print}
+                        />
+                        <RadioChip
+                            id="plant-humidity-no"
+                            name="plant-humidity"
+                            className="radio-chip"
+                            label="No, keep it dry"
+                            onChangeHandler={print}
+                        />
+                    </div>
 
-        const Dropdown = ({ id, className, label, name, onChangeHandler, options }) => (
-            <div>
-                <label htmlFor={id}>
-                    {label}
-                </label>
-                <select id={id} name={name} onChange={onChangeHandler} className={className}>
-                    {
-                        options.map((item, index) => (
-                            <option key={index} value={item.key}> { item.value }</option>
-                        ))
-                    }
-                </select>
-            </div>
-        );
+                    <Dropdown
+                        id="plant-sunlight"
+                        name="plant-sunlight"
+                        label="Sunlight"
+                        className="dropdown"
+                        options={[
+                            {key: "", value: "Please select..."},
+                            {key: "a", value: "Direct sunlight"},
+                            {key: "b", value: "Part sun/Part shade"},
+                            {key: "c", value: "Bright, indirect sunlight"},
+                            {key: "d", value: "Indirect/filtered light"},
+                            {key: "e", value: "Low light"},
+                            {key: "f", value: "Other"}
+                        ]}
+                        onChangeHandler={print}
+                    />
+                    <TextInput id="plant-notes" name="plant-notes" label="Notes" className="text-input"/>
+                </div>
+            );
 
-        function print(val) { console.log(val.target.value) }
+            const HeadingEdit = ({ placeholder}) => {
+                let edit = false;
+                function change() { edit = true; console.log(edit); }
 
-        ReactDOM.render(
-            <FormPage />,
-            document.getElementById("react-holder")
-        );
-    </script>
+                return (
+                    <div className="heading-edit">
+                        { !edit &&
+                                <p>{placeholder}</p>
+                        }
+                        <button className="btn edit-btn" onClick={change}>
+                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
+                    </div>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+                );
+            }
 
-</body>
+            const TextInput = ({ id, className, name, label }) => (
+                <div className="form-element">
+                    <label htmlFor={id}>
+                        {label}
+                    </label>
+                    <textarea
+                        name={name}
+                        id={id}
+                        className={className}
+                        onChange={e => print(e)}>
+                    </textarea>
+                </div>
+            );
+
+            const Dropdown = ({ id, className, label, name, onChangeHandler, options }) => (
+                <div className="form-element">
+                    <label htmlFor={id}>
+                        {label}
+                    </label>
+                    <select id={id} name={name} onChange={onChangeHandler} className={className}>
+                        {
+                            options.map((item, index) => (
+                                <option key={index} value={item.key}> { item.value }</option>
+                            ))
+                        }
+                    </select>
+                </div>
+            );
+
+            const RadioChip = ({ id, className, label, name }) => (
+                <div className="radio-chip">
+                    <input type="radio" id={id} name={name} />
+                    <label htmlFor={id} className={className}>{label}</label>
+                </div>
+            );
+
+            function print(val) { console.log(val.target.value) }
+
+            ReactDOM.render(
+                <FormPage />,
+                document.getElementById("react-holder")
+            );
+        </script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    </body>
 </html>
