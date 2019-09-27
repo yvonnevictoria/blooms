@@ -20,6 +20,8 @@ body {
     border-radius: 8px;
     border: solid 1px #d0ccd2;
     display: inline-block;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .dropdown {
@@ -101,4 +103,19 @@ label {
 
 .form-element {
     margin-bottom: 3%;
+}
+
+.action-btn {
+    font-family: 'Rubik Light', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff9748;
+    border-radius: 8px;
+    padding: 12px 32px 12px 32px;
+    display: block;
+    margin: 5% auto 5% auto;
+}
+
+.action-btn:hover {
+    background-color: #ed7b11;
 }
