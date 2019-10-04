@@ -62,7 +62,7 @@ label {
     background-color: #fff;
     border: none;
     font-size: 25px;
-    color: #ff9748;
+    color: #A491D3;
     margin-left: 5px;
 }
 
@@ -90,9 +90,9 @@ label {
 }
 
 .radio-chip input[type=radio]:checked ~ label {
-  background-color: #ff9748;
+  background-color: #A491D3;
   color: #fff;
-  border: solid 1px #ff9748;
+  border: solid 1px #A491D3;
 }
 
 .radio-chip-group {
@@ -109,7 +109,7 @@ label {
     font-family: 'Rubik Light', sans-serif;
     font-size: 16px;
     color: #fff;
-    background-color: #ff9748;
+    background-color: #A491D3;
     border-radius: 8px;
     padding: 12px 32px 12px 32px;
     display: block;
